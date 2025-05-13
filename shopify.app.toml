@@ -1,4 +1,4 @@
-x# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "771401fd2235b3d9b77498df5452f14b"
 name = "SDS Manager App"
