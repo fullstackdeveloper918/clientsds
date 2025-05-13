@@ -1,0 +1,293 @@
+/* Styling for the Table */
+.stepOne{
+  background-color: red;
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+}
+.container .paragraph{
+  font-size: 16px;
+  margin-bottom: 20px !important;
+  line-height: 25px;
+}
+.span_class {
+  font-size: 18px !important;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+.sdsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+  
+  .sdsTable th, .sdsTable td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+    word-wrap: break-word;
+  }
+  
+  .sdsTable th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .sdsDate, .sdsPrct, .sdsLang, .sdsActn {
+    max-width: 150px;
+  }
+  
+  .sdsPrct, .sdsLang {
+    word-wrap: break-word;
+  }
+  
+  /* Styling for Buttons */
+  .actionButton {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .actionButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .pagination button {
+    margin: 0 5px;
+    padding: 8px 16px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .pagination button a{
+    text-decoration: unset !important;
+     color: black !important;
+  }
+  .pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    color: #4CAF50 !important;
+  }
+  .sdsTable td {
+    white-space: normal; /* allow wrapping */
+    word-break: break-word; /* break long words if needed */
+    max-width: 200px; /* optional: limit width so it wraps nicely */
+  }
+  /* Popup styling */
+  .popup {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 50px auto;
+  }
+  
+  .popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .copyButton {
+    padding: 5px 10px;
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .copyButton:hover {
+    background-color: darkblue;
+  }
+  
+  .textArea {
+    width: 400px;
+    height: 200px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .closeButton, .submitButton {
+    padding: 8px 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .closeButton:hover, .submitButton:hover {
+    background-color: #218838;
+  }
+  
+
+
+/* Table Styles */
+.sdsTable {
+  width: 100%;
+  border-collapse: unset !important;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+
+.sdsTable th, .sdsTable td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.sdsTable th {
+  background-color: #F1F1F1;
+  text-align: left;
+  border: none !important;
+  text-transform: uppercase;
+
+}
+
+.sdsTable td {
+  vertical-align: middle;
+  border: none !important;
+  text-align: left;
+  cursor: pointer;
+}
+.sdsTable td:last-child {
+  border-bottom: none !important;
+}
+.sdsDate, .sdsPrct, .sdsLang, .sdsActn {
+  text-align: center;
+}
+
+/* Action Button */
+.actionButton {
+  padding: 8px 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.actionButton:hover {
+  background-color: #45a049;
+}
+
+.container {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.pageTitle {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #333;
+  text-align: center;
+  line-height: 1.4;
+}
+.intro {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.steps {
+  margin-top: 30px;
+}
+.step {
+  display: flex;
+  margin-bottom: 20px;
+  padding: 20px;
+  /* background-color: #F9F9F9; */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+}
+.stepNumber {
+  width: 40px;
+  height: 40px;
+  background-color: #3298E1;
+  color: white;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+.stepDescription {
+  flex: 1;
+}
+.stepDescription p{
+  font-size: 14px;
+  color: #555;
+  margin: 10px 0px 0px;
+}
+.stepDescription ul {
+  font-size: 16px;
+  color: #555;
+  margin: 10px 0px 0px;
+}
+.stepDescription strong {
+  color: #333;
+  font-weight: bold;
+}
+.stepDescription ul {
+  padding-left: 20px;
+}
+.stepDescription li {
+  margin-bottom: 10px;
+}
+.step:hover {
+  /* background-color: #F1F1F1; */
+  cursor: pointer;
+}
+.stepNumber{
+  transition: background-color 0.3s ease;
+}
+.step-number:hover {
+  background-color: #45A049;
+}
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+  .pageTitle {
+    font-size: 24px;
+  }
+  .step {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .stepNumber{
+    margin-bottom: 10px;
+  }
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 5px solid #eee;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
