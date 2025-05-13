@@ -796,6 +796,7 @@ async function fetchProducts(searchParams) {
     if (!res.ok) throw new Error(`Failed to fetch products: ${res.status}`);
 
     let data = await res.json();
+    console.log(data, "firstdata");
     // If no results in the first call
     if (!Array.isArray(data) || data.length === 0) {
       // Retry with search_type = "match"
@@ -814,7 +815,7 @@ async function fetchProducts(searchParams) {
       if (!res.ok) throw new Error(`Second fetch failed: ${res.status}`);
 
       const secondData = await res.json();
-      // console.log(secondData, "secondData");
+      console.log(secondData, "secondData");
 
       const data = {
         search_string,
