@@ -769,7 +769,6 @@ async function fetchProducts(searchParams) {
   const apiUrl = `${process.env.API_URL_SEARCH}/?page_size=${page_size}&page=${page_index}`;
  //const apiKey = process.env["X_Sds_Search_Access_Api_Key"];
  const apiKey =   accessToken ;
-console.log("accedds" ,apiKey);
 
 
   const createRequestBody = (search_type) => ({
