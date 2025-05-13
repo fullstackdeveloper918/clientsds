@@ -83,7 +83,7 @@ export default function PaginationBar({ total }) {
         </Link>
       </button>
 
-      
+      {/* Page Number Buttons */}
       {pageNumbers.map((pageNumber) => (
         <button key={pageNumber} disabled={pageNumber === currentPage}>
           <Link

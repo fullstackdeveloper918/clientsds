@@ -1,9 +1,9 @@
-# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configurationddd
+x# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "771401fd2235b3d9b77498df5452f14b"
 name = "SDS Manager App"
 handle = "sds-manager-app"
-application_url = "https://clientsds.onrender.com"
+application_url = "https://vintage-lottery-tend-chapters.trycloudflare.com"
 embedded = true
 
 [build]
@@ -12,14 +12,14 @@ dev_store_url = "sdsteststoresds.myshopify.com"
 include_config_on_deploy = true
 
 [access_scopes]
-# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopesddsssdsd
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
 scopes = "read_metaobject_definitions,read_metaobjects,read_products,write_metaobject_definitions,write_metaobjects,write_products"
 
 [auth]
 redirect_urls = [
-  "https://clientsds.onrender.com/auth/callback",
-  "https://clientsds.onrender.com/auth/shopify/callback",
-  "https://clientsds.onrender.com/api/auth/callback"
+  "https://vintage-lottery-tend-chapters.trycloudflare.com/auth/callback",
+  "https://vintage-lottery-tend-chapters.trycloudflare.com/auth/shopify/callback",
+  "https://vintage-lottery-tend-chapters.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
