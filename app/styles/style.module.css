@@ -165,6 +165,7 @@
 }
 .sdsTable td:last-child {
   border-bottom: none !important;
+  width: 15% !important;
 }
 .sdsDate, .sdsPrct, .sdsLang, .sdsActn {
   text-align: center;
@@ -291,3 +292,6 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+
+

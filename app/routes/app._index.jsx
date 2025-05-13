@@ -165,6 +165,16 @@ export default function Index() {
                 )}
               </BlockStack>
             </Card>
+            <Card>
+  <BlockStack gap="400">
+    <Text variant="headingMd" as="h3">How to Show SDS Info on Storefront</Text>
+    <Text variant="bodyMd">
+      You can add SDS and hazard information on your product page using metafields and Shopify’s Custom Liquid blocks.
+    </Text>
+    <Button url="/app/meta">Read More</Button>
+  </BlockStack>
+</Card>
+
           </Layout.Section>
          
         </Layout>

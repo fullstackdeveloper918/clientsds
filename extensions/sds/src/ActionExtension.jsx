@@ -17,7 +17,7 @@ function App() {
   const { i18n, close, data } = useApi(TARGET);
   const [productTitle, setProductTitle] = useState("");
   const [name, setName] = useState('');
-  const [productCode, setProductCode] = useState('');
+  // [productCode, setProductCode] = useState('');
   const [language, setLanguage] = useState('en');
   const [region, setRegion] = useState('All');
   const [vendor, setVendor] = useState('');
@@ -58,7 +58,7 @@ function App() {
     const queryParams = new URLSearchParams({
       name: name,
       product_id: data.selected[0].id.split('/').pop(),
-      product_code: productCode,
+     // product_code: productCode,
       language: language,
       region: region,
       page_size: 10,
@@ -66,7 +66,7 @@ function App() {
 
     }).toString();
 
-    return `apps/new-sds/app/storedata?${queryParams}`;
+    return `apps/sds-manager-app/app/storedata?${queryParams}`;
   };
 
   return (
@@ -81,7 +81,7 @@ function App() {
     >
       <BlockStack>
         <TextField label="Product Name - Supplier Name" value={name} onChange={(value) => setName(value)} />
-        <TextField label="Product Code" value={productCode} onChange={(value) => setProductCode(value)} />
+        {/* <TextField label="Product Code" value={productCode} onChange={(value) => setProductCode(value)} /> */}
 
         <Select
           label="Language"
