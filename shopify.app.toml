@@ -3,7 +3,7 @@ x# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/
 client_id = "771401fd2235b3d9b77498df5452f14b"
 name = "SDS Manager App"
 handle = "sds-manager-app"
-application_url = "https://vintage-lottery-tend-chapters.trycloudflare.com"
+application_url = "https://clientsds.onrender.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "read_metaobject_definitions,read_metaobjects,read_products,write_metao
 
 [auth]
 redirect_urls = [
-  "https://vintage-lottery-tend-chapters.trycloudflare.com/auth/callback",
-  "https://vintage-lottery-tend-chapters.trycloudflare.com/auth/shopify/callback",
-  "https://vintage-lottery-tend-chapters.trycloudflare.com/api/auth/callback"
+  "https://clientsds.onrender.com/auth/callback",
+  "https://clientsds.onrender.com/auth/shopify/callback",
+  "https://clientsds.onrender.com/api/auth/callback"
 ]
 
 [webhooks]
