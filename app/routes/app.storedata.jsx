@@ -769,6 +769,7 @@ async function fetchProducts(searchParams) {
   const apiUrl = `${process.env.API_URL_SEARCH}/?page_size=${page_size}&page=${page_index}`;
  //const apiKey = process.env["X_Sds_Search_Access_Api_Key"];
  const apiKey =   accessToken ;
+console.log("accedds" ,apiKey);
 
 
   const createRequestBody = (search_type) => ({
@@ -796,7 +797,6 @@ async function fetchProducts(searchParams) {
     if (!res.ok) throw new Error(`Failed to fetch products: ${res.status}`);
 
     let data = await res.json();
-    console.log(data, "firstdata");
     // If no results in the first call
     if (!Array.isArray(data) || data.length === 0) {
       // Retry with search_type = "match"
@@ -815,7 +815,7 @@ async function fetchProducts(searchParams) {
       if (!res.ok) throw new Error(`Second fetch failed: ${res.status}`);
 
       const secondData = await res.json();
-      console.log(secondData, "secondData");
+      // console.log(secondData, "secondData");
 
       const data = {
         search_string,
@@ -1002,4 +1002,3 @@ async function getTokenThirdParty(session) {
     throw new Error("Failed to retrieve third-party token.");
   }
 }
-
