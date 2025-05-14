@@ -712,41 +712,7 @@ export default function StoreData() {
   );
 }
 
-//older version
-// async function fetchProducts(searchParams) {
-//   const { search_string, language_code, page_size, page_index ,session ,product_code} = searchParams;
 
-//   const accesTokenThirdParty =  await  getTokenThirdParty(session);
-//   console.log(accesTokenThirdParty, "accesTokenfetchProducts")
-
-//   console.log(page_size, "page size");
-//   console.log(page_index, "page_index");
-//   const apiUrl = `https://discovery.sdsmanager.com/webshop/sds_search?search_string=${search_string}&language_code=${language_code}&page_size=${page_size}&page_index=${page_index}&product_code=${product_code}`;
-
-//   const accessToken =accesTokenThirdParty.access_token
-//     // Make sure to keep your token secure
-
-//   try {
-//     const res = await fetch(apiUrl, {
-//       method: "GET",
-//       headers: {
-//         Authorization: `Bearer ${accessToken}`, // Fixing the string interpolation
-//         "Content-Type": "application/json",
-//       },
-//     });
-
-//     if (!res.ok) {
-//       throw new Error(`Failed to fetch products: ${res.status}`);
-//     }
-
-//     const data = await res.json();
-//     return data;
-//   } catch (error) {
-//     console.error("Error fetching products:", error);
-//     throw error;
-//   }
-// }
-// Helper function to fetch permanent link
 
 async function fetchProducts(searchParams) {
   const {
@@ -793,6 +759,10 @@ console.log("accedds" ,apiKey);
       },
       body: JSON.stringify(firstBody),
     });
+    console.log("res1",res);
+    console.log("firstBody",firstBody);
+
+
 
     if (!res.ok) throw new Error(`Failed to fetch products: ${res.status}`);
 
@@ -813,7 +783,8 @@ console.log("accedds" ,apiKey);
       });
 
       if (!res.ok) throw new Error(`Second fetch failed: ${res.status}`);
-
+        console.log("res2",res);
+    console.log("secondBody",secondBody);
       const secondData = await res.json();
       // console.log(secondData, "secondData");
 
