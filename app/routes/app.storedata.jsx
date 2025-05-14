@@ -30,8 +30,15 @@ export async function loader({ request }) {
 
   const language_code = url.searchParams.get("language");
   const product_code = url.searchParams.get("product_code");
-  console.log(product_code, "product_code");
-  const region = (url.searchParams.get("region") || "en").toUpperCase();
+ console.log(product_code, "product_code");
+  const regionParam = url.searchParams.get("region") || "en";
+  let region;
+
+if (regionParam === "All") {
+  region = regionParam.toLowerCase();
+} else {
+  region = regionParam.toUpperCase();
+}
   const page_size = 10;
   const page_index = parseInt(url.searchParams.get("page_index")) || 1;
 
