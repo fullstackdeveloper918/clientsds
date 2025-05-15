@@ -12,7 +12,7 @@ import {
 import { authenticate } from "../shopify.server";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import prisma from "../db.server"; // Ensure Prisma is setup
+import prisma from "../db.server"; // Ensure Prisma is setupffffff
 import styles from "../styles/style.module.css";
 
 // Loader function to load data from the API
