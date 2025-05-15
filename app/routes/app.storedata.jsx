@@ -26,19 +26,35 @@ export async function loader({ request }) {
     return redirect("/app");
   }
 
+
+   
   const productInf = await fetchProductDetailsFromShopify(session, product_id);
 
   const language_code = url.searchParams.get("language");
   const product_code = url.searchParams.get("product_code");
- console.log(product_code, "product_code");
+
   const regionParam = url.searchParams.get("region") || "en";
   let region;
+  
+const hasSdsLink = await hasSafetyDataSheetLinkMetafield(session, product_id);
+const updatedTag = await updateSdsTag(session, product_id, hasSdsLink);
+
+  console.log(
+    hasSdsLink,
+    "checkmetafieldexistandfilledwithData"
+  );
+   console.log(
+    updatedTag,
+    "updatedTag"
+  );
+ 
 
 if (regionParam === "All") {
   region = regionParam.toLowerCase();
 } else {
   region = regionParam.toUpperCase();
 }
+ 
   const page_size = 10;
   const page_index = parseInt(url.searchParams.get("page_index")) || 1;
 
@@ -68,6 +84,7 @@ if (regionParam === "All") {
       session: session,
       productInf: productInf,
       product_code: product_code,
+      hasSdsLink :hasSdsLink,
       status: 200,
     });
   } catch (error) {
@@ -332,6 +349,7 @@ export default function StoreData() {
     session,
     product_code,
     messagefornoproduct,
+    hasSdsLink,
   } = useLoaderData();
   //console.log("dataStoreData",data);
   const actionRes = useActionData();
@@ -391,6 +409,8 @@ export default function StoreData() {
 
       const timer = setTimeout(() => {
         setOpen(null); // or false, depending on how you're handling the open state
+     
+     navigation("/")
       }, 7000);
 
       // Cleanup the timeout when the component unmounts or `actionRes` changes
@@ -432,6 +452,11 @@ export default function StoreData() {
             {messagefornoproduct.text1}
           </p>
         )}
+          {hasSdsLink != false && (
+  <p className={styles.paragraph}>
+    <b>Link is already attached to this product. If you want to change it, you can do so by clicking below.</b>
+  </p>
+)}
         {data && data.length > 0 ? (
           <table className={styles.sdsTable}>
             <thead>
@@ -720,7 +745,6 @@ export default function StoreData() {
 }
 
 
-
 async function fetchProducts(searchParams) {
   const {
     search_string,
@@ -742,7 +766,6 @@ async function fetchProducts(searchParams) {
   const apiUrl = `${process.env.API_URL_SEARCH}/?page_size=${page_size}&page=${page_index}`;
  //const apiKey = process.env["X_Sds_Search_Access_Api_Key"];
  const apiKey =   accessToken ;
-console.log("accedds" ,apiKey);
 
 
   const createRequestBody = (search_type) => ({
@@ -766,14 +789,11 @@ console.log("accedds" ,apiKey);
       },
       body: JSON.stringify(firstBody),
     });
-    console.log("res1",res);
-    console.log("firstBody",firstBody);
-
-
 
     if (!res.ok) throw new Error(`Failed to fetch products: ${res.status}`);
-
     let data = await res.json();
+    console.log(data, "data hereddd");
+    console.log(firstBody, "firstBody");
     // If no results in the first call
     if (!Array.isArray(data) || data.length === 0) {
       // Retry with search_type = "match"
@@ -790,10 +810,11 @@ console.log("accedds" ,apiKey);
       });
 
       if (!res.ok) throw new Error(`Second fetch failed: ${res.status}`);
-        console.log("res2",res);
-    console.log("secondBody",secondBody);
+
       const secondData = await res.json();
-      // console.log(secondData, "secondData");
+      console.log(secondData, "secondData");
+      console.log(res, "res22");
+
 
       const data = {
         search_string,
@@ -851,38 +872,7 @@ async function fetchPermanentLink({
   }
 }
 
-// async function fetchLinkOfPdf( id, product_id, value ,session) {
-//   console.log(id, product_id, value, "data sending11");
 
-//   const accesTokenThirdParty =  await  getTokenThirdParty(session);
-//    console.log(accesTokenThirdParty, "accesTokenfetchLinkOfPdf")
-
-//   const apiUrl = `https://discovery.sdsmanager.com/webshop/get_permanent_link?customer_id=${value}&sdspdf_id=${id}&product_id=${product_id}`;
-
-//   const accessToken =accesTokenThirdParty.access_token ;
-//     // Make sure to keep your token secure
-
-//   try {
-//     const response = await fetch(apiUrl, {
-//       method: "GET",
-//       headers: {
-//         Authorization: `Bearer ${accessToken}`,
-//         "Content-Type": "application/json",
-//       },
-//     });
-
-//     if (!response.ok) {
-//       throw new Error(`API request failed with status ${response.status}`);
-//     }
-
-//     const data = await response.json();
-//     console.log(data, "data here");
-//     return data;
-//   } catch (error) {
-//     console.error("Error fetching permanent link:", error);
-//     throw error;
-//   }
-// }
 
 async function fetchLinkOfPdf(sds_id, pdf_md5 ,session) {
   const { token: accessToken } = await getTokenThirdParty(session);
@@ -980,3 +970,80 @@ async function getTokenThirdParty(session) {
     throw new Error("Failed to retrieve third-party token.");
   }
 }
+
+
+async function fetchmetafieldexistandfilledwithData(session, product_id) {
+  const config = {
+    method: "get",
+    maxBodyLength: Infinity,
+    url: `https://${session.shop}/admin/api/2025-01/products/${product_id}/metafields.json`,
+    headers: {
+      "X-Shopify-Access-Token": session.accessToken,
+      "Content-Type": "application/json",
+    },
+  };
+
+  return new Promise((resolve, reject) => {
+    axios
+      .request(config)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching metafields:", error);
+        reject(error);
+      });
+  });
+}
+
+// ...existing code...
+async function hasSafetyDataSheetLinkMetafield(session, product_id) {
+  const metafieldsData = await fetchmetafieldexistandfilledwithData(session, product_id);
+  const metafields = metafieldsData?.metafields || [];
+  const sdsMetafield = metafields.find(
+    (mf) =>
+      mf.namespace === "custom" &&
+      mf.key === "safety_data_sheet_permanent_link" &&
+      mf.value && mf.value.trim() !== ""
+  );
+  return !!sdsMetafield;
+}
+
+async function updateSdsTag(session, product_id, shouldAdd) {
+  // Fetch current product details to get existing tags
+  const productData = await fetchProductDetailsFromShopify(session, product_id);
+  const existingTags = productData?.product?.tags || "";
+  let tagsArray = existingTags.split(",").map(t => t.trim()).filter(Boolean);
+
+  const tag = "sdslinklinkalreadyadded";
+  const hasTag = tagsArray.includes(tag);
+
+  if (shouldAdd && !hasTag) {
+    tagsArray.push(tag);
+  } else if (!shouldAdd && hasTag) {
+    tagsArray = tagsArray.filter(t => t !== tag);
+  } else {
+    // No change needed
+    return;
+  }
+
+  const updatedTags = tagsArray.join(", ");
+
+  const config = {
+    method: "put",
+    url: `https://${session.shop}/admin/api/2025-01/products/${product_id}.json`,
+    headers: {
+      "X-Shopify-Access-Token": session.accessToken,
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify({
+      product: {
+        id: product_id,
+        tags: updatedTags,
+      },
+    }),
+  };
+
+  await axios.request(config);
+}
+// ...existing code...
