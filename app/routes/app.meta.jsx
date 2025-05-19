@@ -27,7 +27,7 @@ import {
   
     {% assign ghs = product.metafields.custom.ghs_pictograms | strip | upcase %}
     {% if ghs != "" and ghs != "N/A" %}
-      <p><strong>GHS pictogram:</strong> {{ product.metafields.custom.ghs_pictograms }}</p>
+      <p class="pictogram"><strong>GHS pictogram:</strong> {{ product.metafields.custom.ghs_pictograms }}</p>
     {% endif %}
   
     {% assign precaution = product.metafields.custom.precautionary_codes | strip | upcase %}
@@ -44,7 +44,12 @@ import {
     {% if signal != "" and signal != "N/A" %}
       <p><strong>Signal Word:</strong> {{ product.metafields.custom.signal_word }}</p>
     {% endif %}
-  </div>`;
+  </div>
+<style>
+p.pictogram {
+    display: flex;
+}
+</style>`;
   
     const handleCopy = () => {
       navigator.clipboard.writeText(liquidCode).then(() => {
