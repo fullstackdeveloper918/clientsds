@@ -48,7 +48,14 @@ function App() {
       const productData = await res.json();
       setVendor(productData?.data?.product?.vendor || "");
       console.log('productData', productData?.data?.product?.vendor);
-      setName(productData?.data?.product?.title + ' '+ (productData?.data?.product?.vendor || ""));
+
+          /*
+        Date: 21-05-2025
+        Developer Role: Full Stack
+        Developer Comment: I have added comments for the section below which includes two variables: `title` and `vendor`.
+      */
+      //setName(productData?.data?.product?.title + ' '+ (productData?.data?.product?.vendor || ""));
+      setName(productData?.data?.product?.title);
       setProductTitle(productData.data.product.title);
     })();
   }, [data.selected]);
